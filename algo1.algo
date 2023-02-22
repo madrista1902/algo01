@@ -1,0 +1,41 @@
+,ALGORITHM nb_of_set
+
+VAR
+    set1 array_est : ARRAY_OF INTEGER[5] [3,1,7,9]:
+    set2 array_est : ARRAY_OF INTEGER[5] [2,4,1,9,3] :
+    sum INTEGER:= 0: i INTEGER :=0:,,
+ set3 array_est :ARRAY_OF INTEGER[set1 .union(set2)]
+BEGIN
+   FOR  i in set3 DO
+   if set3[i] not in sum
+   sum += set3[i]
+   
+   END_FOR
+END
+   
+  //:seconde solution
+  ALGORITHM DISTINCT_ELEMENT
+VAR
+SET_1: ARRAY_OF INTEGER[4]:=[3 1 7 9];
+SET_2: ARRAY_OF INTEGER[5]:=[2 4 1 9 3];
+SUM: INTEGER:=0
+BEGIN
+    FOR (i from 0 to 3) DO 
+        FOR(j from 0 to 4)DO
+            IF SET_1[i] = SET_2[j] THEN
+                EXIT; // the elements are not distinct, skip to the next j
+            END_IF
+        END_FOR
+        SUM := SUM + SET_1[i]; // add the distinct element from SET_1 to the sum
+    END_FOR
+    FOR j FROM 0 TO 4 DO
+        FOR i FROM 0 TO 3 DO
+            IF SET_2[j] = SET_1[i] THEN
+                EXIT; // the elements are not distinct, skip to the next i
+            END_IF
+        END_FOR
+        SUM := SUM + SET_2[j]; // add the distinct element from SET_2 to the sum
+    END_FOR
+    WRITE(SUM); // output the sum of the distinct elements
+END
+   
